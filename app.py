@@ -21,18 +21,12 @@ class OllamaChat:
         ]
 
     def add_user_message(self, message: str):
-        """
-        Ajoute le message de l'utilisateur à la conversation
-        """
         self.conversation.append({
             'role': 'user', 
             'content': message
         })
 
     def get_ai_response(self) -> str:
-        """
-        Obtient la réponse de l'IA et l'ajoute à la conversation
-        """
         try:
             response = self.client.chat(
                 model=self.model, 
@@ -55,26 +49,19 @@ class OllamaChat:
             return "Je suis désolé, une erreur s'est produite."
 
     def interactive_chat(self):
-        """
-        Lance une session de chat interactive dans le terminal
-        """
         print("🤖 Assistant Ollama - Tapez 'exit' pour quitter")
         print("-----------------------------------")
 
         while True:
             try:
-                # Demander l'entrée utilisateur
                 user_input = input("\n🧑 Vous : ")
                 
-                # Option de sortie
                 if user_input.lower() in ['exit', 'quit', 'bye']:
                     print("\n🤖 Au revoir !")
                     break
                 
-                # Ajouter le message de l'utilisateur
                 self.add_user_message(user_input)
                 
-                # Obtenir et afficher la réponse
                 print("\n🤖 Assistant : ", end='', flush=True)
                 ai_response = self.get_ai_response()
                 print(ai_response)
