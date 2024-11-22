@@ -2,12 +2,9 @@
 
 > Modèle : llama3.2 de Ollama
 
-Lancer le projet avec Docker
+## Lancer le projet avec Docker
+
 PS : Sur Windows ouvrir Docker Desktop au préalable
-
-## 1. Sans RAG
-
-> IA générative
 
 1. Cloner le projet : `git clone https://github.com/LinelinLove/hetic-ia-llm.git`
 
@@ -15,7 +12,7 @@ PS : Sur Windows ouvrir Docker Desktop au préalable
 
 3. Build et lancer le conteneur : `docker-compose up -d --build`
 
-4. Attendre que le chargement soit terminé jusqu'à qu'il a ces messages suivants :
+4. Attendre que le chargement soit terminé jusqu'à qu'il a ces messages suivants (l'installation du modèle llama3.2 peut prendre du temps) :
 
 > Regarder les logs avec : `docker-compose logs -f` ou directement sur docker-desktop
 
@@ -26,14 +23,20 @@ success
 -----------------------------------
 ```
 
-5. Le projet est prêt à être lancé avec la commande suivante :
-   `docker-compose exec python-ollama python app.py`
-   Vous pouvez à présent donnere des prompts à l'IA !
-   (L'IA met du temps à répondre 20sec à 2min)
+## 1. Sans RAG
+
+> IA générative
+
+Le projet est prêt à être lancé avec la commande suivante :
+
+`docker-compose exec python-ollama python app.py`
+
+Vous pouvez à présent donnere des prompts à l'IA !
+(L'IA met du temps à répondre 20sec à 2min)
 
 ### Changer la température de l'IA
 
-Vous pouvez également changer la température de l'IA (par défaut TEMPERATURE=0.5) :
+Vous pouvez également changer la température de l'IA (par défaut `TEMPERATURE=0.5`) :
 
 > Privilégiez des valeurs entre 0.0 (+ rigide) et 1.0 (+ créatif) pour éviter des textes imprévisibles
 
@@ -63,8 +66,32 @@ https://drive.google.com/file/d/file_id/view
 
 et le coller dans le `.env` dans l'emplacement prévu
 
-7. `docker-compose exec python-ollama python rag.py`
+7. Lancer la commande : `docker-compose exec python-ollama python rag.py`
 
 Votre fichier est installé depuis votre Google Drive
 
 Vous pouvez à présent poser des questions sur le fichier PDF que vous avez fourni ! (L'IA peut mettre 2min à répondre)
+
+> Si les valeurs `FILE_ID`et `CLOUD_API_KEY`du .env n'ont pas été défini, l'IA analysera le fichier qui est par défaut dans le dossier pdf
+
+### 2ème méthode pour analyser un fichier
+
+Vous pouvez préciser directement le `FILE_ID` et `CLOUD_API_KEY` dans la commande :
+
+```
+docker-compose exec -e FILE_ID=placeholder_for_file_id -e CLOUD_API_KEY=placeholder_for_cloud_api_key python-ollama python rag.py
+```
+
+> Si il y a déjà `FILE_ID` dans le fichier `.env`, le `FILE_ID` prise en compte sera celle de la commande, de même pour `CLOUD_API_KEY`
+
+> Vous pouvez également mettre `CLOUD_API_KEY` dans le `.env` et juste modifier `FILE_ID` dans la commande
+
+```
+docker-compose exec -e FILE_ID=placeholder_for_file_id python-ollama python rag.py
+```
+
+Vous pouvez également changer la température en rajoute `-e TEMPERATURE=value`
+
+```
+docker-compose exec -e FILE_ID=placeholder_for_file_id -e CLOUD_API_KEY=placeholder_for_cloud_api_key -e TEMPERATURE=0.5 python-ollama python rag.py
+```
