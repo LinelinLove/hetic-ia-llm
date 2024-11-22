@@ -22,7 +22,7 @@ def download_file(file_id, api_key, destination_path):
 
 
 file_id = os.getenv("FILE_ID")
-api_key = os.getenv("API_KEY")
+api_key = os.getenv("CLOUD_API_KEY")
 destination_path = "./pdf/temp.pdf"
 
 download_file(file_id, api_key, destination_path)
