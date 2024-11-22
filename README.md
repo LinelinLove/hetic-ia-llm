@@ -30,7 +30,7 @@ success
    `docker-compose exec python-ollama python app.py`
 
 Vous pouvez à présent donnere des prompts à l'IA !
-(L'IA met du temps à répondre en général 15 à 20sec)
+(L'IA met du temps à répondre 20sec à 2min)
 
 ## 2. Avec RAG
 
@@ -56,10 +56,8 @@ https://drive.google.com/file/d/file_id/view
 
 et le coller dans le `.env` dans l'emplacement prévu
 
-7. `docker-compose exec python-ollama python cloud.py`
+7. `docker-compose exec python-ollama python rag.py`
 
 Votre fichier est installé depuis votre Google Drive
 
-8. `docker-compose exec python-ollama python rag.py`
-
-Vous pouvez à présent poser des questions sur le fichier PDF que vous avez fourni ! (L'IA met environs 2min à répondre)
+Vous pouvez à présent poser des questions sur le fichier PDF que vous avez fourni ! (L'IA peut mettre 2min à répondre)
