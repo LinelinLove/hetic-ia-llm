@@ -8,4 +8,6 @@ until curl --silent --fail http://localhost:11434; do
 done
 echo "Serveur Ollama prêt !"
 
+ollama pull llama3.2
+
 python app.py
