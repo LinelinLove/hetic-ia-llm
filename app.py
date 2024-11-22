@@ -32,7 +32,7 @@ class OllamaChat:
                 model=self.model, 
                 messages=self.conversation,
                 options={
-                    'temperature': 0.7,  # Contrôle la créativité
+                    'temperature': 1.0,  # Contrôle la créativité
                     'max_tokens': 300    # Limite la longueur de réponse
                 }
             )

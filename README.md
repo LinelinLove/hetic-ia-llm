@@ -25,4 +25,13 @@ Le projet est prêt à être lancé :
 
 Vous pouvez à présent donnere des prompts à l'IA ! (L'assistant met du temps à répondre)
 
-### Avec RAG avec Cloud
+### Avec RAG (avec Google Cloud)
+
+Sur `https://console.cloud.google.com/`
+
+Créer un projet puis : [Identifiants](https://console.cloud.google.com/apis/credentials)
+
+`Créer des identifiants` puis copier la clé API
+
+Puis dans
+[API et services](https://console.cloud.google.com/apis/dashboard), cliquer sur `Activer les API et les services`

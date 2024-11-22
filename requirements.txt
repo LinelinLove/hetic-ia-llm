@@ -1,2 +1,5 @@
 ollama
 requests
+PyPDF2
+logging
+python-dotenv
