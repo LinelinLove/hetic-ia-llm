@@ -28,9 +28,16 @@ success
 
 5. Le projet est prêt à être lancé avec la commande suivante :
    `docker-compose exec python-ollama python app.py`
+   Vous pouvez à présent donnere des prompts à l'IA !
+   (L'IA met du temps à répondre 20sec à 2min)
 
-Vous pouvez à présent donnere des prompts à l'IA !
-(L'IA met du temps à répondre 20sec à 2min)
+### Changer la température de l'IA
+
+Vous pouvez également changer la température de l'IA (par défaut TEMPERATURE=0.5) :
+
+> Privilégiez des valeurs entre 0.0 (+ rigide) et 1.0 (+ créatif) pour éviter des textes imprévisibles
+
+`docker-compose exec -e TEMPERATURE=0.5 python-ollama python app.py`
 
 ## 2. Avec RAG
 
