@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 RUN curl https://ollama.com/install.sh | sh
+RUN ollama pull llama3.2
 
 WORKDIR /app
 
