@@ -9,13 +9,14 @@ RUN curl https://ollama.com/install.sh | sh
 
 WORKDIR /app
 
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
 COPY requirements.txt .
 COPY app.py .
 COPY entrypoint.sh .
 
-RUN pip install --no-cache-dir \
-    ollama \
-    requests
+RUN pip install --no-cache-dir -r requirements.txt
 
 RUN chmod +x entrypoint.sh
 

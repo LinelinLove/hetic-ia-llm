@@ -5,6 +5,7 @@ from typing import List, Dict
 # Configuration du logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+logging.getLogger("httpx").setLevel(logging.WARNING)
 
 class OllamaChat:
     def __init__(self, model: str = 'llama3.2'):
@@ -32,8 +33,7 @@ class OllamaChat:
                 model=self.model, 
                 messages=self.conversation,
                 options={
-                    'temperature': 0.7,  # Contrôle la créativité
-                    'max_tokens': 300    # Limite la longueur de réponse
+                    'temperature': 0.2  # Contrôle la créativité
                 }
             )
             
