@@ -2,7 +2,7 @@ import ollama
 from typing import List, Dict
 
 class OllamaChat:
-    def __init__(self, model: str = 'llama3.2', system_prompt: str = 'Tu es un assistant intelligent.'):
+    def __init__(self, model: str = 'llama3.2', system_prompt: str = 'Tu es un assistant intelligent.', temperature: float = 0.2):
         """
         Initialise une session de chat interactive avec Ollama
         """
@@ -14,6 +14,7 @@ class OllamaChat:
                 'content': system_prompt
             }
         ]
+        self.temperature = temperature
 
     def add_user_message(self, message: str):
         self.conversation.append({
@@ -27,7 +28,7 @@ class OllamaChat:
                 model=self.model, 
                 messages=self.conversation,
                 options={
-                    'temperature': 0.2  # Contrôle la créativité
+                    'temperature': self.temperature  # Contrôle la créativité
                 }
             )
             
@@ -43,7 +44,8 @@ class OllamaChat:
             return "Je suis désolé, une erreur s'est produite."
 
     def interactive_chat(self):
-        print("🤖 Assistant Ollama - Tapez 'exit' pour quitter")
+        print("🤖 Assistant Ollama - Tapez 'exit', 'quit' ou 'bye' pour quitter")
+        print(f"Temperature : {self.temperature}")
         print("-----------------------------------")
 
         while True:
