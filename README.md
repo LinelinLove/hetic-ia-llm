@@ -44,7 +44,7 @@ Vous pouvez également changer la température de l'IA (par défaut `TEMPERATURE
 
 ## 2. Avec RAG
 
-> IA générative avec extraction de texte (avec Google Cloud et Google Drive)
+> IA générative avec extraction de texte de fichier de type PDF (avec Google Cloud et Google Drive)
 
 1. Sur `https://console.cloud.google.com/`, créer un projet puis : [Identifiants](https://console.cloud.google.com/apis/credentials)
 
