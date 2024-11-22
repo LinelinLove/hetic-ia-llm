@@ -1,8 +1,4 @@
-import os
 import requests
-from dotenv import load_dotenv
-
-load_dotenv()
 
 def download_file(file_id, api_key, destination_path):
     """
@@ -19,10 +15,3 @@ def download_file(file_id, api_key, destination_path):
         print(f"Fichier téléchargé avec succès : {destination_path}")
     else:
         print(f"Échec du téléchargement : {response.status_code} - {response.text}")
-
-
-file_id = os.getenv("FILE_ID")
-api_key = os.getenv("CLOUD_API_KEY")
-destination_path = "./pdf/temp.pdf"
-
-download_file(file_id, api_key, destination_path)
