@@ -5,12 +5,14 @@ import logging
 # Configuration du logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+# Désactiver les logs httpx
+logging.getLogger("httpx").setLevel(logging.WARNING)
 
 class OllamaChat:
     def __init__(self, model: str = 'llama3.2'):
         self.model = model
         self.client = ollama.Client(host='http://localhost:11434')
-        self.conversation = [{'role': 'system', 'content': 'Tu es un assistant intelligent. Tu réponds aux questions en fonction du contexte fourni.'}]
+        self.conversation = [{'role': 'system', 'content': 'Tu es un assistant intelligent. Tu réponds aux questions en fonction du contexte fourni de manière courte et concise.'}]
 
     def add_user_message(self, message: str):
         self.conversation.append({'role': 'user', 'content': message})
@@ -20,7 +22,7 @@ class OllamaChat:
             response = self.client.chat(
                 model=self.model, 
                 messages=self.conversation,
-                options={'temperature': 1.0, 'max_tokens': 300}
+                options={'temperature': 0.2}
             )
             ai_message = response['message']['content']
             self.conversation.append({'role': 'assistant', 'content': ai_message})

@@ -1,17 +1,23 @@
 # hetic-ia-llm
 
-## Lancer le projet avec Docker
+> Modèle : llama3.2 de Ollama
 
-### Sans RAG
-
-Cloner le projet : `git clone https://github.com/LinelinLove/hetic-ia-llm.git`
-
-Aller dans le répertoire du projet : `cd hetic-ia-llm`
-
+Lancer le projet avec Docker
 PS : Sur Windows ouvrir Docker Desktop au préalable
-`docker-compose up -d --build`
 
-Regarder les logs : `docker-compose logs -f` et attendre que le chargement soit terminé jusqu'à qu'il a ces messages suivants :
+## 1. Sans RAG
+
+> IA générative
+
+1. Cloner le projet : `git clone https://github.com/LinelinLove/hetic-ia-llm.git`
+
+2. Aller dans le répertoire du projet : `cd hetic-ia-llm`
+
+3. Build et lancer le conteneur : `docker-compose up -d --build`
+
+4. Attendre que le chargement soit terminé jusqu'à qu'il a ces messages suivants :
+
+> Regarder les logs avec : `docker-compose logs -f` ou directement sur docker-desktop
 
 ```
 writing manifest
@@ -20,18 +26,40 @@ success
 -----------------------------------
 ```
 
-Le projet est prêt à être lancé :
-`docker-compose exec python-ollama python app.py`
+5. Le projet est prêt à être lancé avec la commande suivante :
+   `docker-compose exec python-ollama python app.py`
 
-Vous pouvez à présent donnere des prompts à l'IA ! (L'assistant met du temps à répondre)
+Vous pouvez à présent donnere des prompts à l'IA !
+(L'IA met du temps à répondre en général 15 à 20sec)
 
-### Avec RAG (avec Google Cloud)
+## 2. Avec RAG
 
-Sur `https://console.cloud.google.com/`
+> IA générative avec extraction de texte (avec Google Cloud et Google Drive)
 
-Créer un projet puis : [Identifiants](https://console.cloud.google.com/apis/credentials)
+1. Sur `https://console.cloud.google.com/`, créer un projet puis : [Identifiants](https://console.cloud.google.com/apis/credentials)
 
-`Créer des identifiants` puis copier la clé API
+2. `Créer des identifiants` puis copier la clé API
 
-Puis dans
-[API et services](https://console.cloud.google.com/apis/dashboard), cliquer sur `Activer les API et les services`
+3. Puis dans [API et services](https://console.cloud.google.com/apis/dashboard), cliquer sur `Activer les API et les services`
+
+4. Dans [Bibliothèque](https://console.cloud.google.com/apis/library), chercher et cliquer sur Google Drive API (dans Google workspace) et cliquer sur `Activer`
+
+5. Renommer `.env.example` par `.env`et ajouter votre clé API
+
+6. Dans votre Google Drive, importer un fichier PDF (plus le fichier est court, plus le traitement sera rapide) et générer un lien en public
+
+7. Puis récupérer le `file_id` de votre fichier a partir du lien généré comme ci-dessous:
+
+```
+https://drive.google.com/file/d/file_id/view
+```
+
+et le coller dans le `.env` dans l'emplacement prévu
+
+7. `docker-compose exec python-ollama python cloud.py`
+
+Votre fichier est installé depuis votre Google Drive
+
+8. `docker-compose exec python-ollama python rag.py`
+
+Vous pouvez à présent poser des questions sur le fichier PDF que vous avez fourni ! (L'IA met environs 2min à répondre)
